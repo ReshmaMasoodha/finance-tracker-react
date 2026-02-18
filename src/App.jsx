@@ -11,6 +11,7 @@ function App() {
       const addData = [...balance];
       addData.push(data)
       setBalance(addData);
+      window.alert(data);
     }
   }
   const deleteTransaction = (idToDelete) => {
