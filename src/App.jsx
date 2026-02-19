@@ -11,7 +11,6 @@ function App() {
       const addData = [...balance];
       addData.push(data)
       setBalance(addData);
-      window.alert(data);
     }
   }
   const deleteTransaction = (idToDelete) => {
@@ -32,7 +31,7 @@ function App() {
       </nav>
         <Routes>
           <Route path="/" element={<Dashboard data={balance}/>} />
-          <Route path="/Transactions" element={ <Transactions newTrans={addTransaction} deleteTrans={deleteTransaction} updateTrans={updateTransaction} />} />
+          <Route path="/Transactions" element={ <Transactions display={balance} newTrans={addTransaction} deleteTrans={deleteTransaction} updateTrans={updateTransaction} />} />
         </Routes>
       </div>
     </>
