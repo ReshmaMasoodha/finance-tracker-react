@@ -28,6 +28,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
     }
     newTrans(data);
   }
+  const deleteTransaction = (event) => {
+    deleteTrans(event.target.value);
+  }
   return(
     <>
     <form onSubmit = {handleSubmit}>
@@ -98,15 +101,17 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
       <button type = "submit">Submit</button>
     </form>
     <ul>
-      {display.map((dis)=> 
+      {display.map((dis)=> (
       <li key={dis.id}>
         {dis.amount} - 
         {dis.type} - 
         {dis.category} - 
         {dis.account} - 
         {dis.description} 
+        <button onClick={() => deleteTrans(dis.id)}>X</button>
+        
       </li>
-      )}
+      ))}
     </ul>
     </>
   )

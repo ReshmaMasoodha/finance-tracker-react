@@ -14,7 +14,7 @@ function App() {
     }
   }
   const deleteTransaction = (idToDelete) => {
-    const filterDelete = balance.filter(bal=> {if (bal.id!=idToDelete){return true}else {return false}});
+    const filterDelete = balance.filter(bal=> {if (bal.id!=Number(idToDelete)){return true}else {return false}});
     setBalance(filterDelete);
   }
   const updateTransaction = (changeValue) => {
