@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Transactions({display,newTrans,deleteTrans,updateTrans}){
   const [amount,setAmount] = useState(0);
@@ -6,9 +6,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
+  const [sort,setSort] = useState('income');
+  const [filteredLi,setFilteredLi] = useState([]);
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
   }
+  useEffect(() => {
+    const filteredList = display.filter(e => (e.type== sort));
+    setFilteredLi(filteredList);
+  },[sort])
   const handleChangeText = (event) => {
     setType(event.target.value);
     if(event.target.value=="income"){
@@ -30,6 +36,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   }
   const deleteTransaction = (event) => {
     deleteTrans(event.target.value);
+  }
+  const sortByType = (event) => {
+    setSort(event.target.value);
   }
   return(
     <>
@@ -100,8 +109,17 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
       onChange = {(e)=>setDescription(e.target.value)} />
       <button type = "submit">Submit</button>
     </form>
+    <h3>Sort by Type</h3>
+    <select onChange= {sortByType}>
+      <option value = "income">
+        Income
+      </option>
+      <option value = "expense">
+        Expense
+      </option>
+    </select>
     <ul>
-      {display.map((dis)=> (
+      {filteredLi.map((dis)=> (
       <li key={dis.id}>
         {dis.amount} - 
         {dis.type} - 
@@ -109,7 +127,6 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
         {dis.account} - 
         {dis.description} 
         <button onClick={() => deleteTrans(dis.id)}>X</button>
-        
       </li>
       ))}
     </ul>
