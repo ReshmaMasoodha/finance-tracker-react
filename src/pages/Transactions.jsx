@@ -6,14 +6,19 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
-  const [sort,setSort] = useState('income');
+  const [sort,setSort] = useState('all');
   const [filteredLi,setFilteredLi] = useState([]);
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
   }
   useEffect(() => {
+    if(sort!="all"){
     const filteredList = display.filter(e => (e.type== sort));
     setFilteredLi(filteredList);
+    }else{
+      const filteredList = display;
+      setFilteredLi(filteredList);
+    }
   },[sort])
   const handleChangeText = (event) => {
     setType(event.target.value);
@@ -111,6 +116,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
     </form>
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>
+      <option value = "all">
+        All
+      </option>
       <option value = "income">
         Income
       </option>
