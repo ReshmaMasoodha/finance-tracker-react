@@ -7,19 +7,10 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
   const [sort,setSort] = useState('all');
-  const [filteredLi,setFilteredLi] = useState([]);
+  var filteredList = [];
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
   }
-  useEffect(() => {
-    if(sort!="all"){
-    const filteredList = display.filter(e => (e.type== sort));
-    setFilteredLi(filteredList);
-    }else{
-      const filteredList = display;
-      setFilteredLi(filteredList);
-    }
-  },[sort])
   const handleChangeText = (event) => {
     setType(event.target.value);
     if(event.target.value=="income"){
@@ -45,6 +36,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const sortByType = (event) => {
     setSort(event.target.value);
   }
+  if(sort!="all"){
+    filteredList = display.filter(e => (e.type== sort));
+    }else{
+      filteredList = display;
+    }
   return(
     <>
     <form onSubmit = {handleSubmit}>
@@ -127,7 +123,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
       </option>
     </select>
     <ul>
-      {filteredLi.map((dis)=> (
+      {filteredList.map((dis)=> (
       <li key={dis.id}>
         {dis.amount} - 
         {dis.type} - 
