@@ -8,6 +8,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const [account,setAccount] = useState('cash');
   const [sort,setSort] = useState('all');
   var filteredList = [];
+  const [sortAmount,setSortAmount] = useState('descending');
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
   }
@@ -35,6 +36,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   }
   const sortByType = (event) => {
     setSort(event.target.value);
+  }
+  const handleSort = (event) => {
+    setSortAmount(event.target.value);
+    if (sortAmount=='ascending'){
+      filteredList.sort((a, b) => b.amount - a.amount);
+    }
+    else{
+      filteredList.sort((a, b) => a.amount - b.amount);
+    }
   }
   if(sort!="all"){
     filteredList = display.filter(e => (e.type== sort));
@@ -120,6 +130,14 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
       </option>
       <option value = "expense">
         Expense
+      </option>
+    </select>
+    <select onChange = {handleSort}>
+      <option value = 'ascending'>
+        Ascending
+      </option>
+      <option value = 'descending'>
+        Descending
       </option>
     </select>
     <ul>
