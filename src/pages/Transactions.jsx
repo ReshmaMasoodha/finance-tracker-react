@@ -39,17 +39,17 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   }
   const handleSort = (event) => {
     setSortAmount(event.target.value);
-    if (sortAmount=='ascending'){
-      filteredList.sort((a, b) => b.amount - a.amount);
-    }
-    else{
-      filteredList.sort((a, b) => a.amount - b.amount);
-    }
   }
   if(sort!="all"){
     filteredList = display.filter(e => (e.type== sort));
     }else{
       filteredList = display;
+    }
+  if (sortAmount=='ascending'){
+      filteredList.sort((a, b) => a.amount - b.amount);
+    }
+    else{
+      filteredList.sort((a, b) => b.amount - a.amount);
     }
   return(
     <>
