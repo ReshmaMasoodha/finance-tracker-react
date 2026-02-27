@@ -40,6 +40,19 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const handleSort = (event) => {
     setSortAmount(event.target.value);
   }
+  const totalExpense = display.reduce((accumulator, currentValue)=>{
+    if (currentValue.type == "expense"){
+      return accumulator+currentValue.amount;
+    }
+    return accumulator;
+  },0);
+  const totalIncome = display.reduce((accumulator, currentValue)=>{
+    if (currentValue.type == "income"){
+      return accumulator+currentValue.amount;
+    }
+    return accumulator;
+  },0);
+  const netBalance = totalIncome - totalExpense;
   if(sort!="all"){
     filteredList = display.filter(e => (e.type== sort));
     }else{
@@ -140,6 +153,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
         Descending
       </option>
     </select>
+    <p>Total Income {totalIncome}</p>
+    <p>Total Expense {totalExpense}</p>
+    <p>Net Balance {netBalance}</p>
     <ul>
       {filteredList.map((dis)=> (
       <li key={dis.id}>
