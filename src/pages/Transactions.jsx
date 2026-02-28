@@ -66,6 +66,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
     }
   return(
     <>
+      <div>
     <form onSubmit = {handleSubmit}>
       <h3>Amount</h3>
       <input 
@@ -153,9 +154,17 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
         Descending
       </option>
     </select>
+    </div>
+    <div>
     <p>Total Income {totalIncome}</p>
     <p>Total Expense {totalExpense}</p>
-    <p>Net Balance {netBalance}</p>
+    <p>Net Balance</p>
+    {netBalance>0? 
+    <p style={{color: 'green'}}> {netBalance}</p> :
+    <p style={{color: 'red'}}> {netBalance}</p> 
+    }
+    </div>
+    <div>
     <ul>
       {filteredList.map((dis)=> (
       <li key={dis.id}>
@@ -168,6 +177,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
       </li>
       ))}
     </ul>
+    </div>
     </>
   )
 }
