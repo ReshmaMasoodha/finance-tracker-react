@@ -158,11 +158,10 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
     <div>
     <p>Total Income {totalIncome}</p>
     <p>Total Expense {totalExpense}</p>
-    <p>Net Balance</p>
-    {netBalance>0? 
-    <p style={{color: 'green'}}> {netBalance}</p> :
-    <p style={{color: 'red'}}> {netBalance}</p> 
-    }
+    <p>Net Balance {netBalance>0? 
+    <span style={{color: 'green'}}> {netBalance}</span> :
+    <span style={{color: 'red'}}> {netBalance}</span> 
+    }</p>
     </div>
     <div>
     <ul>
