@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function Transactions({display,newTrans,deleteTrans,updateTrans}){
+export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [amount,setAmount] = useState(0);
   const [description,setDescription] = useState('');
   const [type,setType] = useState('expense');
@@ -40,19 +40,6 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
   const handleSort = (event) => {
     setSortAmount(event.target.value);
   }
-  const totalExpense = display.reduce((accumulator, currentValue)=>{
-    if (currentValue.type == "expense"){
-      return accumulator+currentValue.amount;
-    }
-    return accumulator;
-  },0);
-  const totalIncome = display.reduce((accumulator, currentValue)=>{
-    if (currentValue.type == "income"){
-      return accumulator+currentValue.amount;
-    }
-    return accumulator;
-  },0);
-  const netBalance = totalIncome - totalExpense;
   if(sort!="all"){
     filteredList = display.filter(e => (e.type== sort));
     }else{
@@ -156,11 +143,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans})
     </select>
     </div>
     <div>
-    <p>Total Income {totalIncome}</p>
-    <p>Total Expense {totalExpense}</p>
-    <p>Net Balance {netBalance>0? 
-    <span style={{color: 'green'}}> {netBalance}</span> :
-    <span style={{color: 'red'}}> {netBalance}</span> 
+    <p>Total Income {totals.totalIncome}</p>
+    <p>Total Expense {totals.totalExpense}</p>
+    <p>Net Balance {totals.netBalance>0? 
+    <span style={{color: 'green'}}> {totals.netBalance}</span> :
+    <span style={{color: 'red'}}> {totals.netBalance}</span> 
     }</p>
     </div>
     <div>

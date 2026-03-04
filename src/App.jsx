@@ -5,7 +5,23 @@ import Dashboard from './pages/Dashboard.jsx'
 import Transactions from './pages/Transactions.jsx'
 
 function App() {
-  const [balance, setBalance] = useState([]);
+  const [balance,setBalance] = useState([]);
+  const totalExpense = balance.reduce((accumulator, currentValue)=>{
+    if (currentValue.type == "expense"){
+      return accumulator+currentValue.amount;
+    }
+    return accumulator;
+  },0);
+  const totalIncome = balance.reduce((accumulator, currentValue)=>{
+    if (currentValue.type == "income"){
+      return accumulator+currentValue.amount;
+    }
+    return accumulator;
+  },0);
+  const netBalance = totalIncome - totalExpense;
+  const data={totalIncome:totalIncome,
+  totalExpense:totalExpense,
+  netBalance:netBalance}
   const addTransaction = (data) => {
     if(data != null){
       const addData = [...balance];
@@ -30,8 +46,9 @@ function App() {
         <Link to="/">Dashboard</Link> | <Link to="/Transactions">Transactions</Link> 
       </nav>
         <Routes>
-          <Route path="/" element={<Dashboard data={balance}/>} />
-          <Route path="/Transactions" element={ <Transactions display={balance} newTrans={addTransaction} deleteTrans={deleteTransaction} updateTrans={updateTransaction} />} />
+          <Route path="/" element={<Dashboard data={data}/>} />
+          <Route path="/Transactions" element={ <Transactions display={balance} newTrans={addTransaction} deleteTrans={deleteTransaction} updateTrans={updateTransaction}
+          totals = {data}/>} />
         </Routes>
       </div>
     </>
