@@ -41,6 +41,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     setSortAmount(event.target.value);
   }
   if(sort!="all"){
+    //filtering based on sort type
     filteredList = display.filter(e => (e.type== sort));
     }else{
       filteredList = display;
