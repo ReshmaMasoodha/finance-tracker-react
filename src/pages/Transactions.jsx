@@ -155,6 +155,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     <ul>
       {filteredList.map((dis)=> (
       <li key={dis.id}>
+        <span style={{color:'blue'}}>
+          {dis.date.getDate()}-
+          {dis.date.getMonth()} -
+          {dis.date.getFullYear()}
+        </span>
         {dis.amount} - 
         {dis.type} - 
         {dis.category} - 
