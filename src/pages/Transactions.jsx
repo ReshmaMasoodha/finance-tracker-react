@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Popup from './Popup.jsx';
 
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [amount,setAmount] = useState(0);
@@ -7,6 +8,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
   const [sort,setSort] = useState('all');
+  const [button,setButton] = useState(false);
+  const [deleteId,setDeleteId] = useState();
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const handleChange = (event) => {
@@ -39,6 +42,19 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSort = (event) => {
     setSortAmount(event.target.value);
+  }
+  const deleteButton = (id) => {
+    setDeleteId(id)
+    setButton(true);
+  }
+  const handleConfirm = (value) => {
+    if(value){
+      deleteTrans(deleteId);
+      setButton(false);
+    }
+    else{
+      setButton(false);
+    }
   }
   if(sort!="all"){
     //filtering based on sort type
@@ -165,10 +181,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
         {dis.category} - 
         {dis.account} - 
         {dis.description} 
-        <button onClick={() => deleteTrans(dis.id)}>X</button>
+        <button onClick={() => deleteButton(dis.id)}>X</button>
       </li>
       ))}
     </ul>
+    {button &&
+      <Popup confirm = {handleConfirm} id={setDeleteId}>
+        <h3>Delete</h3>
+      </Popup>
+    }
     </div>
     </>
   )
