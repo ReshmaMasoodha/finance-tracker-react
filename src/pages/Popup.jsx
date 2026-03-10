@@ -7,7 +7,7 @@ export default function Popup({confirm,id,children}){
     confirm(false)
   }
   return(
-    <div style ={{position:"fixed"}}>
+    <div style ={{position:"fixed", z-index: 1,}}>
       {children}
     
     <button onClick={handleconfirm}>
