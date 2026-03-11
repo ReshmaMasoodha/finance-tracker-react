@@ -7,7 +7,18 @@ export default function Popup({confirm,id,children}){
     confirm(false)
   }
   return(
-    <div style ={{position:"fixed", z-index: 1,}}>
+    <div style ={{position:"fixed",top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1000,}}>
+      <div style={{background: "gray",
+      padding: "20px",
+      borderRadius: "5px",
+      zIndex: 1001,}}>
       {children}
     
     <button onClick={handleconfirm}>
@@ -16,6 +27,7 @@ export default function Popup({confirm,id,children}){
     <button onClick={handleCancel}>
       Cancel
     </button> 
+    </div>
     </div>
     )
 }
