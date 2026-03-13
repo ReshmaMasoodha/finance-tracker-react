@@ -15,11 +15,11 @@ export default function Popup({confirm,id,children}){
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  zIndex: 1000,}}>
+  zIndex: 1000,}} onClick={handleCancel}>
       <div style={{background: "gray",
       padding: "20px",
       borderRadius: "5px",
-      zIndex: 1001,}}>
+      zIndex: 1001,}} onClick={(e) => {e.stopPropagation()}}>
       {children}
     
     <button onClick={handleconfirm}>
