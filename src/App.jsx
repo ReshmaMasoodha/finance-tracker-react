@@ -1,11 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard.jsx'
 import Transactions from './pages/Transactions.jsx'
 
 function App() {
-  const [balance,setBalance] = useState([]);
+  const [balance,setBalance] = useState(() => {
+        const stored = localStorage.getItem('balance');
+        const storedValue = JSON.parse(stored)
+        const dateArray = storedValue.map(item => {
+          item.date = new Date(item.date);
+         return item} );
+        return stored ? storedValue : [];
+    });
+    
+  useEffect(() => {
+        localStorage.setItem('balance', JSON.stringify(balance));
+    }, [balance]);
   const totalExpense = balance.reduce((accumulator, currentValue)=>{
     if (currentValue.type == "expense"){
       return accumulator+currentValue.amount;
