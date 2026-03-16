@@ -9,11 +9,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [account,setAccount] = useState('cash');
   const [sort,setSort] = useState('all');
   const [button,setButton] = useState(false);
+  const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
+  }
+  const handleDateChange = () => {
+    setChecked(!checked);
   }
   const handleChangeText = (event) => {
     setType(event.target.value);
@@ -68,6 +72,12 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       filteredList.sort((a, b) => b.amount - a.amount);
     }
+const sortByDate = (a, b) => {
+    return a.date - b.date;}
+if(checked){
+  filteredList.sort(sortByDate);
+};
+
   return(
     <>
       <div>
@@ -158,6 +168,10 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
         Descending
       </option>
     </select>
+      <p>Date Sort</p>
+      <input type="checkbox"
+      checked ={checked}
+      onChange = {handleDateChange}/>
     </div>
     <div>
     <p>Total Income {totals.totalIncome}</p>
