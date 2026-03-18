@@ -11,6 +11,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
+  const [editId,setEditId] = useState(0);
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const handleChange = (event) => {
@@ -41,6 +42,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const deleteTransaction = (event) => {
     deleteTrans(event.target.value);
   }
+  const editButton = (id) => {
+    setEditId(id);
+    const editTrans = display.find(item => item.id==id);
+    setAmount(editTrans.amount);
+    setType(editTrans.type);
+    setCategory(editTrans.category);
+    setAccount(editTrans.account);
+    setDescription(editTrans.description);
+  }
   const sortByType = (event) => {
     setSort(event.target.value);
   }
@@ -59,6 +69,22 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       setButton(false);
     }
+  }
+  const handleEditChange = () => {
+    const editData = {
+      id: editId,
+      date: new Date(),
+      amount: amount,
+      type: type,
+      category: category,
+      account: account,
+      description: description
+    }
+    updateTrans(editData,editId);
+    setEditId(0);
+  }
+  const handleCancel = () => {
+    setEditId(0);
   }
   if(sort!="all"){
     //filtering based on sort type
@@ -146,7 +172,12 @@ if(checked){
       <input type = "text"
       value = {description}
       onChange = {(e)=>setDescription(e.target.value)} />
+      {editId != 0 ? <>
+      <button onClick = {handleCancel}>Cancel</button>
+      <button onClick = {handleEditChange}>Update</button> </>
+      :
       <button type = "submit">Submit</button>
+      }
     </form>
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>
@@ -183,7 +214,7 @@ if(checked){
     </div>
     <div>
     <ul>
-      {filteredList.map((dis)=> (
+      {filteredList.map((dis)=> ( 
       <li key={dis.id}>
         <span style={{color:'blue'}}>
           {dis.date.getDate()}-
@@ -195,6 +226,7 @@ if(checked){
         {dis.category} - 
         {dis.account} - 
         {dis.description} 
+        <button onClick = {() => {editButton(dis.id)}}>✏</button> 
         <button onClick={() => deleteButton(dis.id)}>X</button>
       </li>
       ))}

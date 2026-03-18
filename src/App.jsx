@@ -44,10 +44,15 @@ function App() {
     const filterDelete = balance.filter(bal=> {if (bal.id!=Number(idToDelete)){return true}else {return false}});
     setBalance(filterDelete);
   }
-  const updateTransaction = (changeValue) => {
-    const swapValues =[...balance];
-    const temp = changeValue.value;
-    swapValues[changeValue.id] = temp;
+  const updateTransaction = (changeValue,editId) => {
+    const swapValues = balance.map(tran => {
+      if(tran.id == editId) {
+        return changeValue;
+      }
+      else{
+        return tran;
+      }
+    });
     setBalance(swapValues);
   }
   return (
