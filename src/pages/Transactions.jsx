@@ -38,6 +38,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       description: description
     }
     newTrans(data);
+    setAmount('');
+    setType('expense');
+    setCategory('groceries');
+    setAccount('cash');
+    setDescription('');
   }
   const deleteTransaction = (event) => {
     deleteTrans(event.target.value);
@@ -82,9 +87,19 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     }
     updateTrans(editData,editId);
     setEditId(0);
+    setAmount('');
+    setType('expense');
+    setCategory('groceries');
+    setAccount('cash');
+    setDescription('');
   }
   const handleCancel = () => {
     setEditId(0);
+    setAmount('');
+    setType('expense');
+    setCategory('groceries');
+    setAccount('cash');
+    setDescription('');
   }
   if(sort!="all"){
     //filtering based on sort type
