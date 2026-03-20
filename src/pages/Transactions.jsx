@@ -28,6 +28,10 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(amount==0||description!=null){
+      window.alert("Amount and description can't be empty")
+    }
+    else{
     const data = {
       id: Date.now(),
       date: new Date(),
@@ -38,6 +42,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       description: description
     }
     newTrans(data);
+    }
     setAmount('');
     setType('expense');
     setCategory('groceries');
