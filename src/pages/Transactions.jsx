@@ -28,7 +28,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(amount==0||description!=null){
+    if(amount==0||description==null){
       window.alert("Amount and description can't be empty")
     }
     else{
@@ -233,6 +233,9 @@ if(checked){
     }</p>
     </div>
     <div>
+    {display.length <=0 ?
+      <p>Empty List. Add Transcation</p>
+      :
     <ul>
       {filteredList.map((dis)=> ( 
       <li key={dis.id}>
@@ -250,7 +253,7 @@ if(checked){
         <button onClick={() => deleteButton(dis.id)}>X</button>
       </li>
       ))}
-    </ul>
+    </ul>}
     {button &&
       <Popup confirm = {handleConfirm} id={setDeleteId}>
         <h3>Delete</h3>
