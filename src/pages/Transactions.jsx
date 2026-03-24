@@ -244,7 +244,7 @@ if(checked){
           {dis.date.getMonth()} -
           {dis.date.getFullYear()}
         </span>
-        {dis.amount} - 
+        ₹ {dis.amount.toLocaleString('en-US')} - 
         {dis.type} - 
         {dis.category} - 
         {dis.account} - 
