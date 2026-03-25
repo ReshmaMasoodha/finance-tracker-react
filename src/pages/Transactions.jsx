@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
-
+import TransactionItem from './TransactionItem';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [amount,setAmount] = useState(0);
   const [description,setDescription] = useState('');
@@ -238,20 +238,10 @@ if(checked){
       :
     <ul>
       {filteredList.map((dis)=> ( 
-      <li key={dis.id}>
-        <span style={{color:'blue'}}>
-          {dis.date.getDate()}-
-          {dis.date.getMonth()} -
-          {dis.date.getFullYear()}
-        </span>
-        ₹ {dis.amount.toLocaleString('en-US')} - 
-        {dis.type} - 
-        {dis.category} - 
-        {dis.account} - 
-        {dis.description} 
-        <button onClick = {() => {editButton(dis.id)}}>✏</button> 
-        <button onClick={() => deleteButton(dis.id)}>X</button>
-      </li>
+      <>
+      <TransactionItem dis={dis} EditButton={editButton} DeleteButton ={deleteButton} />
+      
+      </>
       ))}
     </ul>}
     {button &&
