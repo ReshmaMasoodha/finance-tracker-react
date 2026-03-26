@@ -125,7 +125,7 @@ if(checked){
 };
 
   return(
-    <>
+    <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
     <form onSubmit = {handleSubmit}>
       <h3>Amount</h3>
@@ -236,7 +236,7 @@ if(checked){
     {display.length <=0 ?
       <p>Empty List. Add Transcation</p>
       :
-    <ul>
+    <ul style ={{padding: "0"}}>
       {filteredList.map((dis)=> ( 
       <>
       <TransactionItem dis={dis} EditButton={editButton} DeleteButton ={deleteButton} />
@@ -250,6 +250,6 @@ if(checked){
       </Popup>
     }
     </div>
-    </>
+    </div>
   )
 }
