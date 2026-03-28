@@ -127,6 +127,9 @@ if(checked){
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
+        <div style={{border: '1px solid #ccc',
+padding: '15px',
+marginBottom: '20px'}}>
     <form onSubmit = {handleSubmit}>
       <h3>Amount</h3>
       <input 
@@ -199,6 +202,7 @@ if(checked){
       <button type = "submit">Submit</button>
       }
     </form>
+    </div>
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>
       <option value = "all">
@@ -234,8 +238,15 @@ if(checked){
     </div>
     <div>
     {display.length <=0 ?
+    <div style={{border: '1px solid #ccc',
+padding: '15px',
+marginBottom: '20px'}}>
       <p>Empty List. Add Transcation</p>
+      </div>
       :
+      <div style={{border: '1px solid #ccc',
+padding: '15px',
+marginBottom: '20px'}}>
     <ul style ={{padding: "0"}}>
       {filteredList.map((dis)=> ( 
       <>
@@ -243,7 +254,10 @@ if(checked){
       
       </>
       ))}
-    </ul>}
+    </ul>
+    </div>
+      
+    }
     {button &&
       <Popup confirm = {handleConfirm} id={setDeleteId}>
         <h3>Delete</h3>
