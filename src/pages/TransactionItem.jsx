@@ -10,15 +10,18 @@ export default function TransactionItem({dis,EditButton,DeleteButton}){
           {dis.date.getMonth()} -
           {dis.date.getFullYear()}
         </span>
-       <span>₹ {dis.amount.toLocaleString('en-US')} </span> 
+        {dis.type== "income"?
+       <span style={{color:'green'}}>₹ {dis.amount.toLocaleString('en-US')} </span> 
+       :
+       <span style={{color:'red'}}>{dis.amount.toLocaleString('en-US')}</span>}
         <span>{dis.type} </span>
         <span>{dis.category} </span>
         <span>{dis.account}  </span>
         <span>{dis.description} </span>
-        <span><button onClick = {() => {EditButton(dis.id)}}>✏</button>
+        <span><button onClick = {() => {EditButton(dis.id)}} style={{backgroundColor:'grey'}}>✏</button>
         </span>
         <span>
-        <button onClick={() => DeleteButton(dis.id)}>X</button>
+        <button onClick={() => DeleteButton(dis.id)} style={{backgroundColor:'red'}}>X</button>
         </span>
       </li>
   )

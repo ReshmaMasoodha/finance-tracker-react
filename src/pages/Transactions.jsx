@@ -199,7 +199,7 @@ marginBottom: '20px'}}>
       <button onClick = {handleCancel}>Cancel</button>
       <button onClick = {handleEditChange}>Update</button> </>
       :
-      <button type = "submit">Submit</button>
+      <button type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
       }
     </form>
     </div>
