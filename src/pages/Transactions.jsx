@@ -197,7 +197,7 @@ marginBottom: '20px'}}>
       onChange = {(e)=>setDescription(e.target.value)} />
       {editId != 0 ? <>
       <button onClick = {handleCancel}>Cancel</button>
-      <button onClick = {handleEditChange}>Update</button> </>
+      <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
       :
       <button type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
       }
