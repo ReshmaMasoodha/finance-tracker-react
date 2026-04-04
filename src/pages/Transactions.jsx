@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
-  const [amount,setAmount] = useState(0);
+  const [amount,setAmount] = useState();
   const [description,setDescription] = useState('');
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
@@ -131,13 +131,15 @@ if(checked){
 padding: '15px',
 marginBottom: '20px'}}>
     <form onSubmit = {handleSubmit}>
-      <h3>Amount</h3>
+      <h3>Amount (₹)</h3>
       <input 
       type="number" 
       value= {amount}
-      onChange= {handleChange}></input>
+      placeholder= "Enter Amount"
+      onChange= {handleChange}
+      style={{marginBottom:"10px"}}></input>
       <h3>Type</h3>
-      <select onChange ={handleChangeText}>
+      <select style={{marginBottom:"10px"}} onChange ={handleChangeText}>
         <option value = "expense">
           Expense
         </option>
@@ -147,7 +149,7 @@ marginBottom: '20px'}}>
       </select>
       <h3>Category</h3>
       {type == "income"?
-        <select onChange= {(e) => setCategory(e.target.value)}>
+        <select style={{marginBottom:"10px"}} onChange= {(e) => setCategory(e.target.value)}>
           <option value = "salary">
             Salary
           </option>
@@ -161,7 +163,7 @@ marginBottom: '20px'}}>
             Gift
           </option>
         </select> :
-        <select onChange={(e) => setCategory(e.target.value)}>
+        <select style={{marginBottom:"10px"}} onChange={(e) => setCategory(e.target.value)}>
           <option value = "groceries">
             Groceries
           </option>
@@ -180,7 +182,7 @@ marginBottom: '20px'}}>
         </select>
       }
       <h3>Account</h3>
-      <select onChange = {(e) => setAccount(e.target.value)}>
+      <select style={{marginBottom:"10px"}} onChange = {(e) => setAccount(e.target.value)}>
         <option value = "cash">
           Cash
         </option>
@@ -194,7 +196,9 @@ marginBottom: '20px'}}>
       <h3>Description</h3>
       <input type = "text"
       value = {description}
-      onChange = {(e)=>setDescription(e.target.value)} />
+      placeholder="Enter Description"
+      onChange = {(e)=>setDescription(e.target.value)} 
+      style={{marginBottom:"10px"}}/>
       {editId != 0 ? <>
       <button onClick = {handleCancel}>Cancel</button>
       <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
