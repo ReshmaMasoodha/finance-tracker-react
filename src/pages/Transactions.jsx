@@ -243,9 +243,11 @@ marginBottom: '20px'}}>
     <div>
     {display.length <=0 ?
     <div style={{border: '1px solid #ccc',
-padding: '15px',
-marginBottom: '20px'}}>
-      <p>Empty List. Add Transcation</p>
+padding: '20px',
+marginBottom: '20px',
+      textAlign: 'center',
+    }}>
+      <p>Add your first Transcation</p>
       </div>
       :
       <div style={{border: '1px solid #ccc',
