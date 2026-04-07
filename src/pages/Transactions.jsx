@@ -3,7 +3,8 @@ import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [amount,setAmount] = useState();
-  const [description,setDescription] = useState('');
+  const [description,setDescription] = useState();
+  const [date,setDate] = useState();
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
@@ -55,6 +56,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const editButton = (id) => {
     setEditId(id);
     const editTrans = display.find(item => item.id==id);
+    const oldDate= editTrans.date;
+    setDate(oldDate);
     setAmount(editTrans.amount);
     setType(editTrans.type);
     setCategory(editTrans.category);
@@ -83,7 +86,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const handleEditChange = () => {
     const editData = {
       id: editId,
-      date: new Date(),
+      date: date,
       amount: amount,
       type: type,
       category: category,
