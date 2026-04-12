@@ -127,15 +127,19 @@ const sortByDate = (a, b) => {
 if(checked){
   filteredList.sort(sortByDate);
 };
-
-
+  if(search!= null){
+    filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.toLowerCase()));
+  }
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
         <div style={{border: '1px solid #ccc',
 padding: '15px',
 marginBottom: '20px'}}>
-         
+          <h3>Search</h3>
+          <input type="text"
+          value={search}
+          onChange ={(e)=>{setSearch(e.target.value)}}></input>
     <form onSubmit = {handleSubmit}>
       <h3>Amount (₹)</h3>
       <input 
