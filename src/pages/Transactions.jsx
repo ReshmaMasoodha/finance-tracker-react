@@ -15,6 +15,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [editId,setEditId] = useState(0);
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
+  const [search,setSearch] = useState();
   const handleChange = (event) => {
     setAmount(Number(event.target.value));
   }
@@ -127,12 +128,14 @@ if(checked){
   filteredList.sort(sortByDate);
 };
 
+
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
         <div style={{border: '1px solid #ccc',
 padding: '15px',
 marginBottom: '20px'}}>
+         
     <form onSubmit = {handleSubmit}>
       <h3>Amount (₹)</h3>
       <input 
@@ -264,8 +267,8 @@ marginBottom: '20px'}}>
       </>
       ))}
     </ul>
+    <p>Total Transcation = {filteredList.length}</p>
     </div>
-      
     }
     {button &&
       <Popup confirm = {handleConfirm} id={setDeleteId}>
