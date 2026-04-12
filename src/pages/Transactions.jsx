@@ -237,6 +237,9 @@ marginBottom: '20px'}}>
         Descending
       </option>
     </select>
+    {search &&
+    <button onClick = {()=>setSearch('')}>Clear Search</button>
+    }
       <p>Date Sort</p>
       <input type="checkbox"
       checked ={checked}
