@@ -8,6 +8,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
   const [account,setAccount] = useState('cash');
+  const [errorAmount,setErrorAmount] = useState(false);
+  const [errorDes,setErrorDes] = useState(false);
   const [sort,setSort] = useState('all');
   const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
@@ -30,8 +32,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(amount==0||description==null){
-      window.alert("Amount and description can't be empty")
+    if(amount==null||description==null){
+      if(amount==null){
+      setErrorAmount(true);}
+      if(description==null){
+      setErrorDes(true);}
     }
     else{
     const data = {
@@ -147,9 +152,10 @@ marginBottom: '20px'}}>
       value= {amount}
       placeholder= "Enter Amount"
       onChange= {handleChange}
-      style={{marginBottom:"10px"}}></input>
+      ></input>
+      {errorAmount && <p style={{color: 'red'}}>Amount can't be empty</p>}
       <h3>Type</h3>
-      <select style={{marginBottom:"10px"}} onChange ={handleChangeText}>
+      <select style={{marginBottom:"10px",marginTop:"10px"}} onChange ={handleChangeText}>
         <option value = "expense">
           Expense
         </option>
@@ -207,8 +213,8 @@ marginBottom: '20px'}}>
       <input type = "text"
       value = {description}
       placeholder="Enter Description"
-      onChange = {(e)=>setDescription(e.target.value)} 
-      style={{marginBottom:"10px"}}/>
+      onChange = {(e)=>setDescription(e.target.value)}/>
+      {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
       {editId != 0 ? <>
       <button onClick = {handleCancel}>Cancel</button>
       <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
