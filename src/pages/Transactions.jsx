@@ -18,8 +18,16 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState();
+  const isValid = errorAmount && errorDes;
   const handleChange = (event) => {
+    const value=event.target.value;
+    if(value==null){
+      setErrorAmount(true);
+    }
+    else{
+      setErrorAmount(false);
     setAmount(Number(event.target.value));
+    }
   }
   const handleDateChange = () => {
     setChecked(!checked);
@@ -30,15 +38,18 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       setCategory("salary")
     }
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if(amount==null||description==null){
-      if(amount==null){
-      setErrorAmount(true);}
-      if(description==null){
-      setErrorDes(true);}
+  const handleDescription = (event) => {
+    const value=event.target.value;
+    if(value==null){
+      setErrorDes(true);
     }
     else{
+      setErrorDes(false);
+      setDescription(event.target.value);
+    }
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const data = {
       id: Date.now(),
       date: new Date(),
@@ -49,12 +60,12 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       description: description
     }
     newTrans(data);
-    }
+
     setAmount('');
     setType('expense');
     setCategory('groceries');
     setAccount('cash');
-    setDescription('');
+    setDescription(''); 
   }
   const deleteTransaction = (event) => {
     deleteTrans(event.target.value);
@@ -213,13 +224,13 @@ marginBottom: '20px'}}>
       <input type = "text"
       value = {description}
       placeholder="Enter Description"
-      onChange = {(e)=>setDescription(e.target.value)}/>
+      onChange = {handleDescription}/>
       {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
       {editId != 0 ? <>
       <button onClick = {handleCancel}>Cancel</button>
       <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
       :
-      <button type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
+      <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
       }
     </form>
     </div>
