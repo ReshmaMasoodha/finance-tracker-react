@@ -18,11 +18,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState();
-  const isValid = errorAmount && errorDes;
   const handleChange = (event) => {
     const value=event.target.value;
-    if(value==null){
+    if(value===''){
       setErrorAmount(true);
+      setAmount(value);
     }
     else{
       setErrorAmount(false);
@@ -40,8 +40,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleDescription = (event) => {
     const value=event.target.value;
-    if(value==null){
+    if(value===''){
       setErrorDes(true);
+      setDescription(value);
     }
     else{
       setErrorDes(false);
@@ -50,6 +51,15 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (amount===''||description===''){
+      if(amount===''){
+        setErrorAmount(true);
+      }
+      if(description===''){
+        setErrorDes(true);
+      }
+    }
+    else{
     const data = {
       id: Date.now(),
       date: new Date(),
@@ -60,13 +70,13 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       description: description
     }
     newTrans(data);
-
     setAmount('');
     setType('expense');
     setCategory('groceries');
     setAccount('cash');
-    setDescription(''); 
-  }
+    setDescription('');
+    
+  }}
   const deleteTransaction = (event) => {
     deleteTrans(event.target.value);
   }
@@ -146,6 +156,7 @@ if(checked){
   if(search!= null){
     filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.toLowerCase()));
   }
+  const isValid = errorAmount || errorDes;
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
