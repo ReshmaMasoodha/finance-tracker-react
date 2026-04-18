@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
-  const [amount,setAmount] = useState();
-  const [description,setDescription] = useState();
+  const [amount,setAmount] = useState('');
+  const [description,setDescription] = useState('');
   const [date,setDate] = useState();
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
