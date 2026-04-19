@@ -1,95 +1,15 @@
 import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
+import TransactionForm from './TransactionForm';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
-  const [amount,setAmount] = useState('');
-  const [description,setDescription] = useState('');
-  const [date,setDate] = useState();
-  const [type,setType] = useState('expense');
-  const [category,setCategory] = useState('groceries');
-  const [account,setAccount] = useState('cash');
-  const [errorAmount,setErrorAmount] = useState(false);
-  const [errorDes,setErrorDes] = useState(false);
   const [sort,setSort] = useState('all');
-  const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
-  const [deleteId,setDeleteId] = useState();
-  const [editId,setEditId] = useState(0);
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState();
-  const handleChange = (event) => {
-    const value=event.target.value;
-    if(value===''){
-      setErrorAmount(true);
-      setAmount(value);
-    }
-    else{
-      setErrorAmount(false);
-    setAmount(Number(event.target.value));
-    }
-  }
   const handleDateChange = () => {
     setChecked(!checked);
-  }
-  const handleChangeText = (event) => {
-    setType(event.target.value);
-    if(event.target.value=="income"){
-      setCategory("salary")
-    }
-  }
-  const handleDescription = (event) => {
-    const value=event.target.value;
-    if(value===''){
-      setErrorDes(true);
-      setDescription(value);
-    }
-    else{
-      setErrorDes(false);
-      setDescription(event.target.value);
-    }
-  }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (amount===''||description===''){
-      if(amount===''){
-        setErrorAmount(true);
-      }
-      if(description===''){
-        setErrorDes(true);
-      }
-    }
-    else{
-    const data = {
-      id: Date.now(),
-      date: new Date(),
-      amount: amount,
-      type: type,
-      category: category,
-      account: account,
-      description: description
-    }
-    newTrans(data);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
-    
-  }}
-  const deleteTransaction = (event) => {
-    deleteTrans(event.target.value);
-  }
-  const editButton = (id) => {
-    setEditId(id);
-    const editTrans = display.find(item => item.id==id);
-    const oldDate= editTrans.date;
-    setDate(oldDate);
-    setAmount(editTrans.amount);
-    setType(editTrans.type);
-    setCategory(editTrans.category);
-    setAccount(editTrans.account);
-    setDescription(editTrans.description);
   }
   const sortByType = (event) => {
     setSort(event.target.value);
@@ -97,9 +17,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const handleSort = (event) => {
     setSortAmount(event.target.value);
   }
-  const deleteButton = (id) => {
-    setDeleteId(id)
-    setButton(true);
+  const deleteTransaction = (event) => {
+    deleteTrans(event.target.value);
   }
   const handleConfirm = (value) => {
     if(value){
@@ -109,32 +28,6 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       setButton(false);
     }
-  }
-  const handleEditChange = () => {
-    const editData = {
-      id: editId,
-      date: date,
-      amount: amount,
-      type: type,
-      category: category,
-      account: account,
-      description: description
-    }
-    updateTrans(editData,editId);
-    setEditId(0);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
-  }
-  const handleCancel = () => {
-    setEditId(0);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
   }
   if(sort!="all"){
     //filtering based on sort type
@@ -156,7 +49,6 @@ if(checked){
   if(search!= null){
     filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.toLowerCase()));
   }
-  const isValid = errorAmount || errorDes;
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
@@ -167,83 +59,7 @@ marginBottom: '20px'}}>
           <input type="text"
           value={search}
           onChange ={(e)=>{setSearch(e.target.value)}}></input>
-    <form onSubmit = {handleSubmit}>
-      <h3>Amount (₹)</h3>
-      <input 
-      type="number" 
-      value= {amount}
-      placeholder= "Enter Amount"
-      onChange= {handleChange}
-      ></input>
-      {errorAmount && <p style={{color: 'red'}}>Amount can't be empty</p>}
-      <h3>Type</h3>
-      <select style={{marginBottom:"10px",marginTop:"10px"}} onChange ={handleChangeText}>
-        <option value = "expense">
-          Expense
-        </option>
-        <option value = "income">
-          Income
-        </option>
-      </select>
-      <h3>Category</h3>
-      {type == "income"?
-        <select style={{marginBottom:"10px"}} onChange= {(e) => setCategory(e.target.value)}>
-          <option value = "salary">
-            Salary
-          </option>
-          <option value = "freelance">
-            Freelance
-          </option>
-          <option value = "investmentReturn">
-            Investment Return
-          </option>
-          <option value = "gift">
-            Gift
-          </option>
-        </select> :
-        <select style={{marginBottom:"10px"}} onChange={(e) => setCategory(e.target.value)}>
-          <option value = "groceries">
-            Groceries
-          </option>
-          <option value = "rent">
-            Rent
-          </option>
-          <option value = "utilities">
-            Utilities
-          </option>
-          <option value = "transport">
-            Transport
-          </option>
-          <option value = "entertainment">
-            Entertainment
-          </option>
-        </select>
-      }
-      <h3>Account</h3>
-      <select style={{marginBottom:"10px"}} onChange = {(e) => setAccount(e.target.value)}>
-        <option value = "cash">
-          Cash
-        </option>
-        <option value = "bank">
-          Bank
-        </option>
-        <option value = "savings">
-          Savings
-        </option>
-      </select>
-      <h3>Description</h3>
-      <input type = "text"
-      value = {description}
-      placeholder="Enter Description"
-      onChange = {handleDescription}/>
-      {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
-      {editId != 0 ? <>
-      <button onClick = {handleCancel}>Cancel</button>
-      <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
-      :
-      <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
-      }
-    </form>
+          <TransactionForm newtrans={newTrans} deletetrans={deleteTrans} display={display} updatetrans={updateTrans}/>
     </div>
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>
