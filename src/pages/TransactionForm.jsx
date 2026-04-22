@@ -9,8 +9,6 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
   const [errorAmount,setErrorAmount] = useState(false);
   const [errorDes,setErrorDes] = useState(false);
   const [button,setButton] = useState(false);
-  const [deleteId,setDeleteId] = useState();
-  const [editId,setEditId] = useState(0);
   const handleChange = (event) => {
     const value=event.target.value;
     if(value===''){
@@ -67,21 +65,7 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
     setDescription('');
     
   }}
-  const editButton = (id) => {
-    setEditId(id);
-    const editTrans = display.find(item => item.id==id);
-    const oldDate= editTrans.date;
-    setDate(oldDate);
-    setAmount(editTrans.amount);
-    setType(editTrans.type);
-    setCategory(editTrans.category);
-    setAccount(editTrans.account);
-    setDescription(editTrans.description);
-  }
-  const deleteButton = (id) => {
-    setDeleteId(id)
-    setButton(true);
-  }
+  
   const handleEditChange = () => {
     const editData = {
       id: editId,
