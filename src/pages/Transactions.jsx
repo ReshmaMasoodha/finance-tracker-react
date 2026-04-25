@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
-  const [amount,setAmount] = useState();
-  const [description,setDescription] = useState();
+  const [amount,setAmount] = useState('');
+  const [description,setDescription] = useState('');
   const [date,setDate] = useState();
   const [type,setType] = useState('expense');
   const [category,setCategory] = useState('groceries');
@@ -20,7 +20,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [search,setSearch] = useState();
   const handleChange = (event) => {
     const value=event.target.value;
-    if(value==null){
+    if(value==''){
       setErrorAmount(true);
     }
     else{
@@ -39,7 +39,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleDescription = (event) => {
     const value=event.target.value;
-    if(value==null){
+    if(value==''){
       setErrorDes(true);
     }
     else{
@@ -49,11 +49,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (amount==null||description==null){
-      if(amount==null){
+    if (amount==''||description==''){
+      if(amount==''){
         setErrorAmount(true);
       }
-      if(description==null){
+      if(description==''){
         setErrorDes(true);
       }
     }
