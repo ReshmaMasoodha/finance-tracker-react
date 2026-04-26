@@ -14,10 +14,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
+  const text = "Add your First Transaction";
   const [editId,setEditId] = useState(0);
   var filteredList = [];
   const [sortAmount,setSortAmount] = useState('descending');
-  const [search,setSearch] = useState();
+  const [search,setSearch] = useState('');
   const handleChange = (event) => {
     const value=event.target.value;
     if(value==''){
@@ -279,13 +280,13 @@ marginBottom: '20px'}}>
     }</p>
     </div>
     <div>
-    {display.length <=0 ?
+    {filteredList.length <=0 && search !=null ?
     <div style={{border: '1px solid #ccc',
 padding: '20px',
 marginBottom: '20px',
       textAlign: 'center',
     }}>
-      <p>Add your first Transcation</p>
+      <p>{search ? "No Results Found" : "Add your First Transaction"}</p>
       </div>
       :
       <div style={{border: '1px solid #ccc',
