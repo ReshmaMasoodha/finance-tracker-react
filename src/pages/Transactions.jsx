@@ -280,7 +280,7 @@ marginBottom: '20px'}}>
     }</p>
     </div>
     <div>
-    {filteredList.length <=0 && search !=null ?
+    {filteredList.length <=0?
     <div style={{border: '1px solid #ccc',
 padding: '20px',
 marginBottom: '20px',
@@ -300,7 +300,10 @@ marginBottom: '20px'}}>
       </>
       ))}
     </ul>
+    {search ?
+    <p>Total Transacrion = {filteredList.length} results found</p> :
     <p>Total Transcation = {filteredList.length}</p>
+    }
     </div>
     }
     {button &&
