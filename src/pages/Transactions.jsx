@@ -151,8 +151,8 @@ const sortByDate = (a, b) => {
 if(checked){
   filteredList.sort(sortByDate);
 };
-  if(search!= null){
-    filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.toLowerCase()));
+  if(search != ''){
+    filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.trim().toLowerCase()));
   }
   const isValid = errorAmount || errorDes;
   return(
