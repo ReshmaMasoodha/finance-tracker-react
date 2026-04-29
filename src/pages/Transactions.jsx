@@ -134,6 +134,16 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     setAccount('cash');
     setDescription('');
   }
+  const clearForm = ()=>{
+    setEditId(0);
+    setAmount('');
+    setType('expense');
+    setCategory('groceries');
+    setAccount('cash');
+    setDescription('');
+    setErrorAmount(false);
+    setErrorDes(false);
+  }
   if(sort!="all"){
     //filtering based on sort type
     filteredList = display.filter(e => (e.type== sort));
@@ -239,7 +249,10 @@ marginBottom: '20px'}}>
       <button onClick = {handleCancel}>Cancel</button>
       <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
       :
+      <>
       <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
+      <button type="button" onClick={clearForm}> clear form</button>
+      </>
       }
     </form>
     </div>
