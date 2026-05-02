@@ -26,7 +26,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     }
     else{
       setErrorAmount(false);
-    setAmount(Number(event.target.value));
+    setAmount(event.target.value);
     }
   }
   const handleDateChange = () => {
@@ -125,6 +125,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     setCategory('groceries');
     setAccount('cash');
     setDescription('');
+    
   }
   const handleCancel = () => {
     setEditId(0);
@@ -133,6 +134,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     setCategory('groceries');
     setAccount('cash');
     setDescription('');
+    setErrorAmount(false);
+    setErrorDes(false);
   }
   const clearForm = ()=>{
     setEditId(0);
@@ -246,8 +249,8 @@ marginBottom: '20px'}}>
       onChange = {handleDescription}/>
       {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
       {editId != 0 ? <>
-      <button onClick = {handleCancel}>Cancel</button>
-      <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
+      <button type = "button" onClick = {handleCancel}>Cancel</button>
+      <button type = "button" onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
       :
       <>
       <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
