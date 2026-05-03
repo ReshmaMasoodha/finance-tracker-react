@@ -1,5 +1,5 @@
 import {useState} from 'react';
-export default function TransactionForm ({newtrans, display, updatetrans}){
+export default function TransactionForm ({onAdd}){
   const [amount,setAmount] = useState('');
   const [description,setDescription] = useState('');
   const [date,setDate] = useState();
@@ -8,16 +8,15 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
   const [account,setAccount] = useState('cash');
   const [errorAmount,setErrorAmount] = useState(false);
   const [errorDes,setErrorDes] = useState(false);
-  const [button,setButton] = useState(false);
+  
   const handleChange = (event) => {
     const value=event.target.value;
-    if(value===''){
+    if(value==''){
       setErrorAmount(true);
-      setAmount(value);
     }
     else{
       setErrorAmount(false);
-    setAmount(Number(event.target.value));
+    setAmount(event.target.value);
     }
   }
   const handleChangeText = (event) => {
@@ -28,9 +27,8 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
   }
   const handleDescription = (event) => {
     const value=event.target.value;
-    if(value===''){
+    if(value==''){
       setErrorDes(true);
-      setDescription(value);
     }
     else{
       setErrorDes(false);
@@ -39,11 +37,11 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (amount===''||description===''){
-      if(amount===''){
+    if (amount==''||description==''){
+      if(amount==''){
         setErrorAmount(true);
       }
-      if(description===''){
+      if(description==''){
         setErrorDes(true);
       }
     }
@@ -57,44 +55,25 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
       account: account,
       description: description
     }
-    newtrans(data);
+    onAdd(data);
     setAmount('');
     setType('expense');
     setCategory('groceries');
     setAccount('cash');
     setDescription('');
-    
   }}
-  
-  const handleEditChange = () => {
-    const editData = {
-      id: editId,
-      date: date,
-      amount: amount,
-      type: type,
-      category: category,
-      account: account,
-      description: description
-    }
-    updatetrans(editData,editId);
-    setEditId(0);
+  const clearForm = ()=>{
     setAmount('');
     setType('expense');
     setCategory('groceries');
     setAccount('cash');
     setDescription('');
-  }
-  const handleCancel = () => {
-    setEditId(0);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
+    setErrorAmount(false);
+    setErrorDes(false);
   }
   const isValid = errorAmount || errorDes;
   return(
-    <form onSubmit = {handleSubmit}>
+     <form onSubmit = {handleSubmit}>
       <h3>Amount (₹)</h3>
       <input 
       type="number" 
@@ -164,12 +143,9 @@ export default function TransactionForm ({newtrans, display, updatetrans}){
       placeholder="Enter Description"
       onChange = {handleDescription}/>
       {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
-      {editId != 0 ? <>
-      <button onClick = {handleCancel}>Cancel</button>
-      <button onClick = {handleEditChange} style={{backgroundColor: 'blue',cursor: 'pointer'}}>Update</button> </>
-      :
+    
       <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
-      }
+      <button type="button" onClick={clearForm}> clear form</button>
     </form>
   )
 }
