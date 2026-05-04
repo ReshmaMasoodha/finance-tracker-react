@@ -19,15 +19,8 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   }
   const editButton = (id) => {
     setEditId(id);
-    const editTrans = display.find(item => item.id==id);
-    const oldDate= editTrans.date;
-    setDate(oldDate);
-    setAmount(editTrans.amount);
-    setType(editTrans.type);
-    setCategory(editTrans.category);
-    setAccount(editTrans.account);
-    setDescription(editTrans.description);
   }
+  const editData = display.find(item => item.id==editId);
   const sortByType = (event) => {
     setSort(event.target.value);
   }
@@ -46,34 +39,6 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       setButton(false);
     }
-  }
-  const handleEditChange = () => {
-    const editData = {
-      id: editId,
-      date: date,
-      amount: amount,
-      type: type,
-      category: category,
-      account: account,
-      description: description
-    }
-    updateTrans(editData,editId);
-    setEditId(0);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
-  }
-  const handleCancel = () => {
-    setEditId(0);
-    setAmount('');
-    setType('expense');
-    setCategory('groceries');
-    setAccount('cash');
-    setDescription('');
-    setErrorAmount(false);
-    setErrorDes(false);
   }
   if(sort!="all"){
     //filtering based on sort type
@@ -105,7 +70,12 @@ marginBottom: '20px'}}>
           <input type="text"
           value={search}
           onChange ={(e)=>{setSearch(e.target.value)}}></input>
-   <TransactionForm onAdd={newTrans}/>
+   <TransactionForm 
+   onAdd={newTrans}
+   onUpdate={updateTrans}
+   editData={editData}
+   onCancel={()=> setEditId(0)}
+   />
     </div>
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>

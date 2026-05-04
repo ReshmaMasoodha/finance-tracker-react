@@ -1,5 +1,5 @@
-import {useState} from 'react';
-export default function TransactionForm ({onAdd}){
+import {useState, useEffect} from 'react';
+export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
   const [amount,setAmount] = useState('');
   const [description,setDescription] = useState('');
   const [date,setDate] = useState();
@@ -9,6 +9,22 @@ export default function TransactionForm ({onAdd}){
   const [errorAmount,setErrorAmount] = useState(false);
   const [errorDes,setErrorDes] = useState(false);
   
+  useEffect(()=> {
+    if(editData){
+      setAmount(editData.amount);
+      setDescription(editData.description);
+      setType(editData.type);
+      setCategory(editData.category);
+      setAccount(editData.account);
+    }
+    else{
+      setAmount('');
+      setDescription('');
+      setType('');
+      setCategory('');
+      setAccount('');
+    }
+  },[editData]);
   const handleChange = (event) => {
     const value=event.target.value;
     if(value==''){
@@ -55,7 +71,12 @@ export default function TransactionForm ({onAdd}){
       account: account,
       description: description
     }
-    onAdd(data);
+    if(editData){
+      onUpdate(data, editData.id)
+    }
+    else{
+      onAdd(data);
+    }
     setAmount('');
     setType('expense');
     setCategory('groceries');
@@ -146,6 +167,9 @@ export default function TransactionForm ({onAdd}){
     
       <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
       <button type="button" onClick={clearForm}> clear form</button>
+      {editData && 
+        <button type="button" onClick={onCancel} >Cancel</button>
+      }
     </form>
   )
 }
