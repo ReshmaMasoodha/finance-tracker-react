@@ -95,6 +95,7 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
   const isValid = errorAmount || errorDes;
   return(
      <form onSubmit = {handleSubmit}>
+       {editData && <p>Editing.....</p>}
       <h3>Amount (₹)</h3>
       <input 
       type="number" 
@@ -165,10 +166,16 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
       onChange = {handleDescription}/>
       {errorDes && <p style={{color: 'red'}}>Description canct be empty!</p>}
     
-      <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
-      <button type="button" onClick={clearForm}> clear form</button>
-      {editData && 
+      {editData ?
+      <>
+        <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Update</button>
         <button type="button" onClick={onCancel} >Cancel</button>
+        </>
+        :
+        <>
+        <button disabled={isValid}type = "submit" style={{backgroundColor:'blue'}}>Submit</button>
+      <button type="button" onClick={clearForm}> clear form</button>
+      </>
       }
     </form>
   )
