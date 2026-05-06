@@ -19,13 +19,13 @@ function App() {
     }, [balance]);
   const totalExpense = balance.reduce((accumulator, currentValue)=>{
     if (currentValue.type == "expense"){
-      return accumulator+currentValue.amount;
+      return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const totalIncome = balance.reduce((accumulator, currentValue)=>{
     if (currentValue.type == "income"){
-      return accumulator+currentValue.amount;
+      return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
