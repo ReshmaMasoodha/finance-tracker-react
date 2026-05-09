@@ -52,6 +52,60 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       filteredList.sort((a, b) => b.amount - a.amount);
     }
+    const groceries = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "groceries"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const rent = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "rent"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const entertainment = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "entertainment"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const utilities = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "utilities"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const transport = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "transport"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const salary = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "salary"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const freelance = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "freelance"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const investment = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "investmentReturn"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
+  const gift = filteredList.reduce((accumulator, currentValue)=>{
+    if (currentValue.category == "gift"){
+      return accumulator+Number(currentValue.amount);
+    }
+    return accumulator;
+  },0);
 const sortByDate = (a, b) => {
     return a.date - b.date;}
 if(checked){
@@ -106,12 +160,19 @@ marginBottom: '20px'}}>
       onChange = {handleDateChange}/>
     </div>
     <div>
+      <p>Category Totals:</p>   
     <p>Total Income {totals.totalIncome}</p>
     <p>Total Expense {totals.totalExpense}</p>
     <p>Net Balance {totals.netBalance>0? 
     <span style={{color: 'green'}}> {totals.netBalance}</span> :
     <span style={{color: 'red'}}> {totals.netBalance}</span> 
     }</p>
+    <p>Total Groceries {groceries}    
+    Total Rent {rent}    Total Utilities {utilities}     Total Transport {transport}    Total Entertainment {entertainment}
+    </p>
+    <p>
+       Total Salary {salary}    Total Investment Retun {investment} Total Freelance {freelance}   Total Gift {gift}
+    </p>
     </div>
     <div>
     {filteredList.length <=0?
