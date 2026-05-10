@@ -53,55 +53,55 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       filteredList.sort((a, b) => b.amount - a.amount);
     }
     const groceries = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "groceries"){
+    if (currentValue.category == "🛒groceries"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const rent = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "rent"){
+    if (currentValue.category == "🏠rent"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const entertainment = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "entertainment"){
+    if (currentValue.category == "🎬entertainment"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const utilities = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "utilities"){
+    if (currentValue.category == "💡utilities"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const transport = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "transport"){
+    if (currentValue.category == "🚗transport"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const salary = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "salary"){
+    if (currentValue.category == "💰salary"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const freelance = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "freelance"){
+    if (currentValue.category == "💻freelance"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const investment = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "investmentReturn"){
+    if (currentValue.category == "📈investmentReturn"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;
   },0);
   const gift = filteredList.reduce((accumulator, currentValue)=>{
-    if (currentValue.category == "gift"){
+    if (currentValue.category == "🎁gift"){
       return accumulator+Number(currentValue.amount);
     }
     return accumulator;

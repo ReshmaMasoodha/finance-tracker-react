@@ -6,9 +6,7 @@ export default function TransactionItem({dis,EditButton,DeleteButton}){
   padding: '10px',
   borderBottom: '1px solid #ccc' }}>
         <span style={{color:'blue',padding:'5px'}}>
-          {dis.date.getDate()}-
-          {dis.date.getMonth()} -
-          {dis.date.getFullYear()}
+          {dis.date.getDate()}    {dis.date.toLocaleString('default', {month: 'short' })}   {dis.date.getFullYear()}
         </span>
         {dis.type== "income"?
        <span style={{color:'green'}}>₹ {dis.amount.toLocaleString('en-US')} </span> 

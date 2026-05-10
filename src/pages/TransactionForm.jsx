@@ -4,7 +4,7 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
   const [description,setDescription] = useState('');
   const [date,setDate] = useState();
   const [type,setType] = useState('expense');
-  const [category,setCategory] = useState('groceries');
+  const [category,setCategory] = useState('🛒groceries');
   const [account,setAccount] = useState('cash');
   const [errorAmount,setErrorAmount] = useState(false);
   const [errorDes,setErrorDes] = useState(false);
@@ -38,7 +38,7 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
   const handleChangeText = (event) => {
     setType(event.target.value);
     if(event.target.value=="income"){
-      setCategory("salary")
+      setCategory("💰salary")
     }
   }
   const handleDescription = (event) => {
@@ -79,14 +79,14 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
     }
     setAmount('');
     setType('expense');
-    setCategory('groceries');
+    setCategory('🛒groceries');
     setAccount('cash');
     setDescription('');
   }}
   const clearForm = ()=>{
     setAmount('');
     setType('expense');
-    setCategory('groceries');
+    setCategory('🛒groceries');
     setAccount('cash');
     setDescription('');
     setErrorAmount(false);
@@ -116,33 +116,33 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
       <h3>Category</h3>
       {type == "income"?
         <select style={{marginBottom:"10px"}} onChange= {(e) => setCategory(e.target.value)}>
-          <option value = "salary">
+          <option value = "💰salary">
             Salary
           </option>
-          <option value = "freelance">
+          <option value = "💻freelance">
             Freelance
           </option>
-          <option value = "investmentReturn">
+          <option value = "📈investmentReturn">
             Investment Return
           </option>
-          <option value = "gift">
+          <option value = "🎁gift">
             Gift
           </option>
         </select> :
         <select style={{marginBottom:"10px"}} onChange={(e) => setCategory(e.target.value)}>
-          <option value = "groceries">
+          <option value = "🛒groceries">
             Groceries
           </option>
-          <option value = "rent">
+          <option value = "🏠rent">
             Rent
           </option>
-          <option value = "utilities">
+          <option value = "💡utilities">
             Utilities
           </option>
-          <option value = "transport">
+          <option value = "🚗transport">
             Transport
           </option>
-          <option value = "entertainment">
+          <option value = "🎬entertainment">
             Entertainment
           </option>
         </select>
