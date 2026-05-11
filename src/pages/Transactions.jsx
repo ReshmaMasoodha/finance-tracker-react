@@ -3,13 +3,14 @@ import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 import TransactionForm from './TransactionForm';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
-  const [sort,setSort] = useState('all');
-  const [sortCat,setSortCat] = useState('all');
+  const [sort,setSort] = useState("all");
+  const [sortCat,setSortCat] = useState("all");
   const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
   const [editId,setEditId] = useState(0);
   var filteredList = [];
+  var filter1 = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState('');
   const handleDateChange = () => {
@@ -26,7 +27,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     setSort(event.target.value);
   }
   const sortByCategory = (event) => {
-    sortByCat(event.target.value);
+    setSortCat(event.target.value);
   }
   const handleSort = (event) => {
     setSortAmount(event.target.value);
@@ -51,10 +52,11 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       filteredList = display;
     }
     if(sortCat!="all"){
-      filteredList = display.filter(e=> (e.category == sortCat));
+     filter1 = filteredList.filter(e=> (e.category == sortCat));
+     filteredList = filter1;
     }
     else{
-      filteredList=display
+      filteredList=filteredList;
     }
   if (sortAmount=='ascending'){
       filteredList.sort((a, b) => a.amount - b.amount);
@@ -153,7 +155,7 @@ marginBottom: '20px'}}>
         Expense
       </option>
     </select>
-    {sortByType == "income" ?
+    {sort == "income" ?
     <select onChange ={sortByCategory}>
       <option value = "all">
         All
