@@ -20,9 +20,9 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
     else{
       setAmount('');
       setDescription('');
-      setType('');
-      setCategory('');
-      setAccount('');
+      setType('expense');
+      setCategory('🛒groceries');
+      setAccount('cash');
     }
   },[editData]);
   const handleChange = (event) => {

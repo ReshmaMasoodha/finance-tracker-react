@@ -4,6 +4,7 @@ import TransactionItem from './TransactionItem';
 import TransactionForm from './TransactionForm';
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [sort,setSort] = useState('all');
+  const [sortCat,setSortCat] = useState('all');
   const [button,setButton] = useState(false);
   const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
@@ -23,6 +24,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const editData = display.find(item => item.id==editId);
   const sortByType = (event) => {
     setSort(event.target.value);
+  }
+  const sortByCategory = (event) => {
+    sortByCat(event.target.value);
   }
   const handleSort = (event) => {
     setSortAmount(event.target.value);
@@ -45,6 +49,12 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     filteredList = display.filter(e => (e.type== sort));
     }else{
       filteredList = display;
+    }
+    if(sortCat!="all"){
+      filteredList = display.filter(e=> (e.category == sortCat));
+    }
+    else{
+      filteredList=display
     }
   if (sortAmount=='ascending'){
       filteredList.sort((a, b) => a.amount - b.amount);
@@ -143,6 +153,46 @@ marginBottom: '20px'}}>
         Expense
       </option>
     </select>
+    {sortByType == "income" ?
+    <select onChange ={sortByCategory}>
+      <option value = "all">
+        All
+      </option>
+      <option value = "💰salary">
+            Salary
+          </option>
+          <option value = "💻freelance">
+            Freelance
+          </option>
+          <option value = "📈investmentReturn">
+            Investment Return
+          </option>
+          <option value = "🎁gift">
+            Gift
+          </option>
+    </select>
+    : 
+    <select onChange = {sortByCategory}>
+      <option value = "all">
+        All
+      </option>
+      <option value = "🛒groceries">
+            Groceries
+          </option>
+          <option value = "🏠rent">
+            Rent
+          </option>
+          <option value = "💡utilities">
+            Utilities
+          </option>
+          <option value = "🚗transport">
+            Transport
+          </option>
+          <option value = "🎬entertainment">
+            Entertainment
+          </option>
+    </select>
+    }
     <select onChange = {handleSort}>
       <option value = 'ascending'>
         Ascending
