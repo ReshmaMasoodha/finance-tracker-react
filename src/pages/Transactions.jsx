@@ -9,7 +9,6 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [checked,setChecked] = useState(false);
   const [deleteId,setDeleteId] = useState();
   const [editId,setEditId] = useState(0);
-  var filteredList = [];
   var filter1 = [];
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState('');
@@ -45,7 +44,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
       setButton(false);
     }
   }
-  if(sort!="all"){
+  const getFilteredTransaction = () =>{
+    let filteredList=[];
+      if(sort!="all"){
     //filtering based on sort type
     filteredList = display.filter(e => (e.type== sort));
     }else{
@@ -64,6 +65,17 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     else{
       filteredList.sort((a, b) => b.amount - a.amount);
     }
+    const sortByDate = (a, b) => {
+    return a.date - b.date;}
+if(checked){
+  filteredList.sort(sortByDate);
+};
+  if(search != ''){
+    filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.trim().toLowerCase()));
+  }
+  return filteredList;
+  }
+ const filteredList = getFilteredTransaction();
     const groceries = filteredList.reduce((accumulator, currentValue)=>{
     if (currentValue.category == "🛒groceries"){
       return accumulator+Number(currentValue.amount);
@@ -118,14 +130,7 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
     }
     return accumulator;
   },0);
-const sortByDate = (a, b) => {
-    return a.date - b.date;}
-if(checked){
-  filteredList.sort(sortByDate);
-};
-  if(search != ''){
-    filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.trim().toLowerCase()));
-  }
+  
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
