@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Popup from './Popup.jsx';
 import TransactionItem from './TransactionItem';
 import TransactionForm from './TransactionForm';
+import TransactionTotal from './TransactionTotal';
+
 export default function Transactions({display,newTrans,deleteTrans,updateTrans,totals}){
   const [sort,setSort] = useState("all");
   const [sortCat,setSortCat] = useState("all");
@@ -76,17 +78,6 @@ if(checked){
   return filteredList;
   }
  const filteredList = getFilteredTransaction();
- 
-    const categoryTotals = filteredList.reduce((accumulator, currentValue) => {
-  const category = currentValue.category;
-  if(accumulator[category]){
-    accumulator[category] += Number(currentValue.amount);
-  }
-  else{
-    accumulator[category] = Number(currentValue.amount);
-  }
-  return accumulator;
-}, {});
   
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
@@ -181,9 +172,7 @@ marginBottom: '20px'}}>
     <span style={{color: 'green'}}> {totals.netBalance}</span> :
     <span style={{color: 'red'}}> {totals.netBalance}</span> 
     }</p>
-    {Object.entries(categoryTotals).map(([category,total])=>(
-    <p>{category}: ₹{total}</p>
-    ))}
+    <TransactionTotal filteredList={filteredList} />
     </div>
     <div>
     {filteredList.length <=0?
