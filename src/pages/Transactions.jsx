@@ -108,7 +108,7 @@ marginBottom: '20px'}}>
         Expense
       </option>
     </select>
-    {sort == "income" ?
+    {sort == "income" || sort == "all" ?
     <select onChange ={sortByCategory}>
       <option value = "all">
         All
