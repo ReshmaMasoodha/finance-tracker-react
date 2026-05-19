@@ -12,6 +12,9 @@ export default function Transactions({display,newTrans,deleteTrans,updateTrans,t
   const [deleteId,setDeleteId] = useState();
   const [editId,setEditId] = useState(0);
   var filter1 = [];
+  const style1 = {border: '1px solid #ccc',
+padding: '15px',
+marginBottom: '20px'};
   const [sortAmount,setSortAmount] = useState('descending');
   const [search,setSearch] = useState('');
   const handleDateChange = () => {
@@ -82,9 +85,7 @@ if(checked){
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
-        <div style={{border: '1px solid #ccc',
-padding: '15px',
-marginBottom: '20px'}}>
+        <div style={style1}>
           <h3>Search</h3>
           <input type="text"
           value={search}
@@ -184,9 +185,7 @@ marginBottom: '20px',
       <p>{search ? "No Results Found" : "Add your First Transaction"}</p>
       </div>
       :
-      <div style={{border: '1px solid #ccc',
-padding: '15px',
-marginBottom: '20px'}}>
+      <div style={style1}>
     <ul style ={{padding: "0"}}>
       {filteredList.map((dis)=> ( 
       <>
