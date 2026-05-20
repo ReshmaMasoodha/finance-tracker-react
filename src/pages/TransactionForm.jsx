@@ -95,7 +95,7 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
   const isValid = errorAmount || errorDes;
   return(
      <form onSubmit = {handleSubmit}>
-       {editData && <p>Editing.....</p>}
+       {editData && <p style ={{color:'red',}}>Editing Transaction.....</p>}
       <h3>Amount (₹)</h3>
       <input 
       type="number" 
@@ -117,33 +117,33 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
       {type == "income"?
         <select style={{marginBottom:"10px"}} onChange= {(e) => setCategory(e.target.value)}>
           <option value = "💰salary">
-            Salary
+            💰Salary
           </option>
           <option value = "💻freelance">
-            Freelance
+            💻Freelance
           </option>
           <option value = "📈investmentReturn">
-            Investment Return
+            📈Investment Return
           </option>
           <option value = "🎁gift">
-            Gift
+            🎁Gift
           </option>
         </select> :
         <select style={{marginBottom:"10px"}} onChange={(e) => setCategory(e.target.value)}>
           <option value = "🛒groceries">
-            Groceries
+            🛒Groceries
           </option>
           <option value = "🏠rent">
-            Rent
+            🏠Rent
           </option>
           <option value = "💡utilities">
-            Utilities
+            💡Utilities
           </option>
           <option value = "🚗transport">
-            Transport
+            🚗Transport
           </option>
           <option value = "🎬entertainment">
-            Entertainment
+            🎬Entertainment
           </option>
         </select>
       }
