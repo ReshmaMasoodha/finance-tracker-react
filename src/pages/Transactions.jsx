@@ -70,17 +70,20 @@ marginBottom: '20px'};
     else{
       filteredList.sort((a, b) => b.amount - a.amount);
     }
-    const sortByDate = (a, b) => {
-    return a.date - b.date;}
-if(checked){
-  filteredList.sort(sortByDate);
-};
   if(search != ''){
     filteredList = filteredList.filter(e => e.description.toLowerCase().includes(search.trim().toLowerCase()));
   }
   return filteredList;
   }
  const filteredList = getFilteredTransaction();
+ const sortByDate = (a, b) => {
+    return a.date - b.date;}
+if(checked){
+  filteredList.sort(sortByDate);
+};
+ const recentList = [...filteredList];
+ recentList.sort(sortByDate);
+ const visibleList = recentList.slice(0,5);
   
   return(
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
@@ -186,6 +189,23 @@ marginBottom: '20px',
       </div>
       :
       <div style={style1}>
+     <ul style ={{padding: "0"}}>
+      {visibleList.map((dis)=> ( 
+      <>
+      <li><span style={{color:'blue',padding:'5px'}}>
+          {dis.date.getDate()}    {dis.date.toLocaleString('default', {month: 'short' })}   {dis.date.getFullYear()}
+        </span>
+        {dis.type== "income"?
+       <span style={{color:'green'}}>₹ {dis.amount.toLocaleString('en-US')} </span> 
+       :
+       <span style={{color:'red'}}>{dis.amount.toLocaleString('en-US')}</span>}
+        <span>{dis.type} </span>
+        <span>{dis.category} </span>
+        <span>{dis.account}  </span>
+        <span>{dis.description} </span></li>
+      </>
+      ))}
+    </ul>
     <ul style ={{padding: "0"}}>
       {filteredList.map((dis)=> ( 
       <>
