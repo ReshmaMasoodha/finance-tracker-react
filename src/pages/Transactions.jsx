@@ -189,6 +189,7 @@ marginBottom: '20px',
       </div>
       :
       <div style={style1}>
+        <p>Recent Transactions</p>
      <ul style ={{padding: "0"}}>
       {visibleList.map((dis)=> ( 
       <>
