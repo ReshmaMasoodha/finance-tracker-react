@@ -89,10 +89,12 @@ if(checked){
     <div style={{padding: '0',margin:'0',maxWidth:'1200px'}}>
       <div>
         <div style={style1}>
+          //Search
           <h3>Search</h3>
           <input type="text"
           value={search}
           onChange ={(e)=>{setSearch(e.target.value)}}></input>
+          //Transaction Form
    <TransactionForm 
    onAdd={newTrans}
    onUpdate={updateTrans}
@@ -100,6 +102,7 @@ if(checked){
    onCancel={()=> setEditId(0)}
    />
     </div>
+    //Filtering transactiom
     <h3>Sort by Type</h3>
     <select onChange= {sortByType}>
       <option value = "all">
@@ -189,6 +192,7 @@ marginBottom: '20px',
       </div>
       :
       <div style={style1}>
+        //Recent Transactions
         <p>Recent Transactions</p>
      <ul style ={{padding: "0"}}>
       {visibleList.map((dis)=> ( 
@@ -207,6 +211,7 @@ marginBottom: '20px',
       </>
       ))}
     </ul>
+    //Transaction list
     <ul style ={{padding: "0"}}>
       {filteredList.map((dis)=> ( 
       <>
