@@ -172,6 +172,7 @@ if(checked){
       onChange = {handleDateChange}/>
     </div>
     <div>
+      <p>Filter: {search} | {sort} | {sortCat} </p>
       <p>Category Totals:</p>   
     <p>Total Income {totals.totalIncome}</p>
     <p>Total Expense {totals.totalExpense}</p>
@@ -221,7 +222,7 @@ marginBottom: '20px',
       ))}
     </ul>
     {search ?
-    <p>Total Transacrion = {filteredList.length} results found</p> :
+    <p>Showing {filteredList.length} transaction</p> :
     <p>Total Transcation = {filteredList.length}</p>
     }
     </div>
