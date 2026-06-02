@@ -189,7 +189,7 @@ padding: '20px',
 marginBottom: '20px',
       textAlign: 'center',
     }}>
-      <p>{search ? "No Results Found" : "Add your First Transaction"}</p>
+      <p>{search ? "No transaction match your current search" : "No transaction yet. Add your first transaction above"}</p>
       </div>
       :
       <div style={style1}>
