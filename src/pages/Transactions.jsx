@@ -49,6 +49,13 @@ marginBottom: '20px'};
       setButton(false);
     }
   }
+  const clearFilter = () => {
+    setSort("all");
+    setSortCat("all");
+    setSearch("");
+    setChecked(false);
+    setSortAmount("ascending");
+  }
   const getFilteredTransaction = () =>{
     let filteredList=[];
       if(sort!="all"){
@@ -170,6 +177,7 @@ if(checked){
       <input type="checkbox"
       checked ={checked}
       onChange = {handleDateChange}/>
+      <button onClick ={clearFilter}> Clear Filter </button>
     </div>
     <div>
       <p>Filter: {search} | {sort} | {sortCat} </p>
