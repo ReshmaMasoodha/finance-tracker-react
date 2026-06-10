@@ -105,7 +105,7 @@ export default function TransactionForm ({onAdd,editData,onUpdate,onCancel}){
       ></input>
       {errorAmount && <p style={{color: 'red'}}>Amount can't be empty</p>}
       <h3>Type</h3>
-      <select style={{marginBottom:"10px",marginTop:"10px"}} onChange ={handleChangeText}>
+      <select style={{marginBottom:"10px",marginTop:"10px"}} value ={type} onChange ={handleChangeText}>
         <option value = "expense">
           Expense
         </option>
